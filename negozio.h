@@ -8,10 +8,8 @@
 
 
 /* ____ per r/w _____ */
-#include <QXmlStreamWriter>
-#include <QXmlStreamReader>
-#include <QFile>
-#include <QString>
+#include <fstream>
+
 
 class Negozio
 {
@@ -26,7 +24,7 @@ public:
 
 
     //r/w
-    void salva_dati(/*string*/);
+    void salva_dati() const;
     void carica_dati(string) const throw(Ecc_File_Non_Trovato);
     //DEVO CENTRALIZZARE IL NOME DEL FILE DI OUTPUT
 private:

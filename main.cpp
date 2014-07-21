@@ -86,5 +86,6 @@ int main(){
     n.inserisci_bicicletta(b3);
     cout<<n.isEmpty();
     n.stampa();
+    n.salva_dati();
 
 }

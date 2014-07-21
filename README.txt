@@ -1,5 +1,5 @@
 cose che mancano:
-iterator; -->da sistemare
+
 const_iterator; 
 
 ricerca (da fare nella classe Negozio mediante gli iteratori della classe Container)

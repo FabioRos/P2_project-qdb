@@ -1,4 +1,5 @@
 #include "negozio.h"
+using namespace std;
 
 /*
 
@@ -33,13 +34,13 @@ void Negozio::carica_dati(string str="") const throw(Ecc_File_Non_Trovato){
 
 }
 
-void Negozio::stampa() const{ // da testare
+void Negozio::stampa() const{
 
 
     for (Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++){
         //cout<<typename(this->shop[it]);
         (this->shop[it])->stampa();
-        std::cout<<endl;
+        cout<<endl;
     }
 
 
@@ -47,32 +48,12 @@ void Negozio::stampa() const{ // da testare
 
 
 
-void Negozio::salva_dati(/*string s*/){     //TESTING
-    /*QFile output;
-        output.open(stdout, QIODevice::WriteOnly);
-    //! [write output]
-    //! [start stream]
-        QXmlStreamWriter stream(&output);
-        stream.setAutoFormatting(true);
-        stream.writeStartDocument();
-    //! [start stream]
-        stream.writeDTD("<!DOCTYPE xbel>");
-        stream.writeStartElement("xbel");
-        stream.writeAttribute("version", "1.0");
-        stream.writeStartElement("folder");
-        stream.writeAttribute("folded", "no");
-    //! [write element]
-        stream.writeStartElement("bookmark");
-        stream.writeAttribute("href", "http://qt.nokia.com/");
-        stream.writeTextElement("title", "Qt Home");
-        stream.writeEndElement(); // bookmark
-    //! [write element]
-        stream.writeEndElement(); // folder
-        stream.writeEndElement(); // xbel
-    //! [finish stream]
-        stream.writeEndDocument();
-    //! [finish stream]
-    //! [write output]
-        output.close();*/
-
+void Negozio::salva_dati() const{
+      ofstream myfile;
+      myfile.open("example.txt");
+      myfile << "Writing this to a file.\n";
+      myfile << "Writing this to a file.\n";
+      myfile << "Writing this to a file.\n";
+      myfile << "Writing this to a file.\n";
+      myfile.close();
 }
