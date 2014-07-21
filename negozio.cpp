@@ -39,6 +39,7 @@ void Negozio::stampa() const{ // da testare
     for (Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++){
         //cout<<typename(this->shop[it]);
         (this->shop[it])->stampa();
+        std::cout<<endl;
     }
 
 

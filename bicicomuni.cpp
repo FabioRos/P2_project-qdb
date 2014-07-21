@@ -40,6 +40,7 @@ ostream& operator << (ostream& os, const BiciComuni& b){
     return os;
 }
 void BiciComuni::stampa() const{
+    cout<<"Bicicletta comune"<<endl;
     this->Bicicletta::stampa();
     if(!cestino && !seggiolino && !portapacchi && !copricatena && !fanale)
         return;

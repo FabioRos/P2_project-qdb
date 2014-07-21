@@ -95,7 +95,7 @@ template <class T>
 Container<T>::SmartP::~SmartP(){
     if(punt){
         punt->riferimenti--;
-        if( punt->riferimenti)
+        if( punt->riferimenti == 0)
             delete punt;
     }
 }

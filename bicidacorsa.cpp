@@ -13,6 +13,7 @@ double BiciDaCorsa::getPeso() const{
     return this->peso;
 }
 void BiciDaCorsa::stampa() const{
+    cout<< "Bicicletta da corsa"<<endl;
     this->Bicicletta::stampa();
     cout<<"Specialità: \t"<< getSpecialita()<<endl
         <<"Materiale: \t"<< getMateriale()<<endl

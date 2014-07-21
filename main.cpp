@@ -76,7 +76,7 @@ int main(){
 
     Bicicletta b1;
     BiciDaCorsa b2;
-    BiciComuni b3;
+    BiciComuni b3(true,false,false,true,true);
 //    b1.stampa();
 //    b2.stampa();
 //    b3.stampa();
@@ -85,6 +85,6 @@ int main(){
     n.inserisci_bicicletta(b2);
     n.inserisci_bicicletta(b3);
     cout<<n.isEmpty();
-    //n.stampa();
+    n.stampa();
 
 }
