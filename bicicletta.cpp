@@ -118,7 +118,7 @@ string Bicicletta::serializza() const{
 }
 
 
-Bicicletta* Bicicletta::parse(string riga) const{//da controllare
+Bicicletta* Bicicletta::parse(string riga) {   //da controllare
 
     string array_temp[6];
 

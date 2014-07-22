@@ -2,7 +2,7 @@
 
 BiciDaCorsa::BiciDaCorsa(){
 }
-BiciDaCorsa::BiciDaCorsa(Bicicletta b,string s,string m,double p):Bicicletta(b),specialita(s),materiale(m),peso(p){}
+BiciDaCorsa::BiciDaCorsa(const Bicicletta &b,string s,string m,double p):Bicicletta(b),specialita(s),materiale(m),peso(p){}
 string BiciDaCorsa::getSpecialita() const{
     return this->specialita;
 }
@@ -62,7 +62,7 @@ string BiciDaCorsa::serializza() const{
 }
 
 
-Bicicletta* BiciDaCorsa::parse(string riga) const{//da controllare
+Bicicletta* BiciDaCorsa::parse(string riga){//da controllare
     Bicicletta b( *(Bicicletta::parse(riga)));
     //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
     string array_temp[3];

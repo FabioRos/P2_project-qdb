@@ -74,7 +74,7 @@ int main(){
 
     Bicicletta b1;
     BiciDaCorsa b2;
-    BiciComuni b3(true,false,false,true,true);
+    BiciComuni b3(b1,true,false,false,true,true);
 //    b1.stampa();
 //    b2.stampa();
 //    b3.stampa();
@@ -88,5 +88,11 @@ int main(){
     cout<< b1.serializza();
     cout<< b2.serializza();
     cout<< b3.serializza();
-    b1.parse(b1.serializza());
+   // Bicicletta *b_parsed=b1.parse(b1.serializza());
+    //b_parsed->stampa();
+
+
+
+    cout<< "\n NEGOZIO CARICAMENTO DATI \n";
+    n.carica_dati(NOME_FILE);
 }

@@ -30,7 +30,7 @@ public:
     //r/w
 
     void salva_dati();  //sul serialize manda le cose senza il tipo iniziale, usao per capire e chiama quello giusto!
-    void carica_dati(string) const throw(Ecc_File_Non_Trovato);
+    void carica_dati(const char*) const throw(Ecc_File_Non_Trovato);
    // string getLineByFile(string,int) const;
     //static string OttieniToken(string s);
 

@@ -10,7 +10,7 @@ class BiciComuni : public Bicicletta
 {
 public:
     BiciComuni();
-    BiciComuni(bool,bool,bool,bool,bool);
+    BiciComuni(const Bicicletta&,bool,bool,bool,bool,bool);
     bool getCestino ()      const;
     bool getSeggiolino ()   const;
     bool getPortapacchi ()  const;
@@ -25,6 +25,7 @@ public:
     void stampa()       const;
     void modifica(const Bicicletta&);
     string serializza() const;
+    static Bicicletta* parse(string);
 private:
     bool cestino;
     bool seggiolino;

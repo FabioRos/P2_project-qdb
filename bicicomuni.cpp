@@ -1,7 +1,7 @@
 #include "bicicomuni.h"
 
 BiciComuni::BiciComuni():cestino(0),seggiolino(0),portapacchi(0),copricatena(0),fanale(0){}
-BiciComuni::BiciComuni(bool c,bool s,bool p,bool cc,bool f):cestino(c),seggiolino(s),portapacchi(p),
+BiciComuni::BiciComuni(const Bicicletta& b,bool c,bool s,bool p,bool cc,bool f):Bicicletta(b),cestino(c),seggiolino(s),portapacchi(p),
     copricatena(cc),fanale(f){}
 
 bool BiciComuni::getCestino() const{
@@ -82,5 +82,44 @@ string BiciComuni::serializza() const{
     biciBase=biciBase.substr(0,biciBase.length()-1);
     string s="[BiciComuni]:"+biciBase+":"+Str_cestino+":"+Str_seggiolino+":"+Str_portapacchi+":"+Str_copricatena+":"+Str_fanale+"\n";
     return s;
+
+}
+
+Bicicletta* BiciComuni::parse(string riga) {//da controllare
+    Bicicletta b( *(Bicicletta::parse(riga)));
+    //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
+    string array_temp[5];
+
+    int pos = 0,i=0;
+    std::string token;
+    while ((pos = riga.find(':')) != std::string::npos) {   //npos~= -1 -> significa che il find(':') è fallito
+        i=i+1;
+        token = riga.substr(0, pos);
+        array_temp[i] = token;
+        riga.erase(0, pos + 1);
+    }
+    bool cestino;
+    bool seggiolino;
+    bool portapacchi;
+    bool copricatena;
+    bool fanale;
+    stringstream conv_cestino(array_temp[0]);
+    if ( !(conv_cestino >> cestino) )
+        cestino=0;
+    stringstream conv_seggiolino(array_temp[1]);
+    if ( !(conv_seggiolino >> seggiolino) )
+        seggiolino=0;
+    stringstream conv_portapacchi(array_temp[2]);
+    if ( !(conv_portapacchi >> portapacchi) )
+        portapacchi=0;
+    stringstream conv_copricatena(array_temp[3]);
+    if ( !(conv_copricatena >> copricatena) )
+        copricatena=0;
+    stringstream conv_fanale(array_temp[4]);
+    if ( !(conv_fanale >> fanale) )
+        fanale=0;
+
+     array_temp[5] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
+     return new BiciComuni(b,cestino,seggiolino,portapacchi,copricatena,fanale);
 
 }
