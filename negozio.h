@@ -9,11 +9,15 @@
 
 /* ____ per r/w _____ */
 #include <fstream>
+#include <iostream>
+
+#define NOME_FILE "file.dat" //define ripetuto in Bicicletta
 
 
 class Negozio
 {
 public:
+
     Negozio();
     void inserisci_bicicletta(const Bicicletta&);
     void rimuovi_bicicletta(const Bicicletta&);
@@ -24,9 +28,12 @@ public:
 
 
     //r/w
-    void salva_dati() const;
+
+    void salva_dati();  //sul serialize manda le cose senza il tipo iniziale, usao per capire e chiama quello giusto!
     void carica_dati(string) const throw(Ecc_File_Non_Trovato);
-    //DEVO CENTRALIZZARE IL NOME DEL FILE DI OUTPUT
+   // string getLineByFile(string,int) const;
+    //static string OttieniToken(string s);
+
 private:
     Container<Bicicletta*> shop;
 };

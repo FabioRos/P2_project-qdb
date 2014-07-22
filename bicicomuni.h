@@ -24,6 +24,7 @@ public:
     void setFanale      (bool);
     void stampa()       const;
     void modifica(const Bicicletta&);
+    string serializza() const;
 private:
     bool cestino;
     bool seggiolino;

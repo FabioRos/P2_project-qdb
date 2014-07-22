@@ -1,9 +1,13 @@
 #ifndef BICICLETTA_H
 #define BICICLETTA_H
 
+#define NOME_FILE "file.dat"
+
 #include <iostream>
 #include <string>
 #include "eccezioni.h"
+#include <sstream>  //serve per salvare i numeri in formato stringa
+#include "utilita.h"
 
 using namespace std;
 
@@ -11,6 +15,7 @@ class Bicicletta
 {
 public:
     Bicicletta();
+    Bicicletta(const Bicicletta&);
     Bicicletta(string,string,float,float,int,double);
     virtual ~Bicicletta();  //perche se voglio distruggere una bici da corsa con un punt
                             //a bicicletta dealloca solo la parte della icicletta e non
@@ -35,6 +40,11 @@ public:
     virtual void stampa() const;
     /*virtual*/ void modifica(string ma, string mo, float l, float a, int q, double p);
     virtual void modifica(const Bicicletta&);
+
+
+
+    virtual string serializza() const;
+    Bicicletta* parse(string) const;
 private:
     string marca;
     string modello;

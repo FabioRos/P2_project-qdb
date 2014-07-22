@@ -10,7 +10,7 @@ class BiciDaCorsa : public Bicicletta
 {
 public:
     BiciDaCorsa();
-    BiciDaCorsa(string,string,double);
+    BiciDaCorsa(Bicicletta b,string,string,double);
     bool operator==(const BiciDaCorsa&) const;
     void stampa() const;
     string getSpecialita() const;
@@ -20,6 +20,8 @@ public:
     void setMateriale(string);
     void setPeso(double);
     void modifica(const Bicicletta&);
+    string serializza() const;
+    Bicicletta* parse(string) const;
 
 private:
     string specialita;    //crono, strada, Pista

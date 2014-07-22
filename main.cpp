@@ -11,8 +11,6 @@ using namespace std;
 #include <iostream>
 #include "container.h"
 #include "finestra_principale.h"
-
-using namespace std;
 /*
 int main(int argc, char* argv[]){
 
@@ -87,5 +85,8 @@ int main(){
     cout<<n.isEmpty();
     n.stampa();
     n.salva_dati();
-
+    cout<< b1.serializza();
+    cout<< b2.serializza();
+    cout<< b3.serializza();
+    b1.parse(b1.serializza());
 }

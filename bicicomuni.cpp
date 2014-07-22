@@ -46,11 +46,11 @@ void BiciComuni::stampa() const{
         return;
     else{
         cout<<"equipaggiamento:\n";
-            if(getCestino())    cout<<"-cestino \n"     ;
-            if(getSeggiolino()) cout<<"-seggiolino \n"  ;
-            if(getPortapacchi())cout<<"-portapacchi \n" ;
-            if(getCopricatena())cout<<"-copricatena \n" ;
-            if(getFanale())     cout<<"-fanale \n"      ;
+        if(getCestino())    cout<<"-cestino \n"     ;
+        if(getSeggiolino()) cout<<"-seggiolino \n"  ;
+        if(getPortapacchi())cout<<"-portapacchi \n" ;
+        if(getCopricatena())cout<<"-copricatena \n" ;
+        if(getFanale())     cout<<"-fanale \n"      ;
     }
 }
 
@@ -64,4 +64,23 @@ void BiciComuni::modifica(const Bicicletta& b){
         copricatena=bc->copricatena;
         fanale=bc->fanale;
     }
+}
+
+string BiciComuni::serializza() const{
+    std::ostringstream ce,se,p,co,f;
+    ce << cestino;
+    se << seggiolino;
+    p << portapacchi;
+    co << copricatena;
+    f << fanale;
+    string Str_cestino = ce.str();
+    string Str_seggiolino = se.str();
+    string Str_portapacchi = p.str();
+    string Str_copricatena = co.str();
+    string Str_fanale = f.str();
+    string biciBase=Bicicletta::serializza();
+    biciBase=biciBase.substr(0,biciBase.length()-1);
+    string s="[BiciComuni]:"+biciBase+":"+Str_cestino+":"+Str_seggiolino+":"+Str_portapacchi+":"+Str_copricatena+":"+Str_fanale+"\n";
+    return s;
+
 }
