@@ -85,8 +85,8 @@ string BiciComuni::serializza() const{
 
 }
 
-Bicicletta* BiciComuni::parse(string riga) {//da controllare
-    Bicicletta b( *(Bicicletta::parse(riga)));
+BiciComuni& BiciComuni::parse(string& riga) {//da controllare
+    Bicicletta b( Bicicletta::parse(riga));
     //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
     string array_temp[5];
 
@@ -98,6 +98,7 @@ Bicicletta* BiciComuni::parse(string riga) {//da controllare
         array_temp[i] = token;
         riga.erase(0, pos + 1);
     }
+    array_temp[4] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
     bool cestino;
     bool seggiolino;
     bool portapacchi;
@@ -119,7 +120,7 @@ Bicicletta* BiciComuni::parse(string riga) {//da controllare
     if ( !(conv_fanale >> fanale) )
         fanale=0;
 
-     array_temp[5] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
-     return new BiciComuni(b,cestino,seggiolino,portapacchi,copricatena,fanale);
+    BiciComuni b_(b,cestino,seggiolino,portapacchi,copricatena,fanale);
+     return b_;
 
 }

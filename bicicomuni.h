@@ -25,7 +25,7 @@ public:
     void stampa()       const;
     void modifica(const Bicicletta&);
     string serializza() const;
-    static Bicicletta* parse(string);
+    static BiciComuni& parse(string&);
 private:
     bool cestino;
     bool seggiolino;

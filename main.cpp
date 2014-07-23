@@ -72,26 +72,28 @@ int main(){
 
     Negozio.stampa();*/
 
-    Bicicletta b1;
-    BiciDaCorsa b2;
-    BiciComuni b3(b1,true,false,false,true,true);
+//    Bicicletta b1;
+//    BiciDaCorsa b2(b1,"crono","carbonio",7.3);
+//    BiciComuni b3(b1,true,false,false,true,true);
 //    b1.stampa();
 //    b2.stampa();
 //    b3.stampa();
     Negozio n;
-    n.inserisci_bicicletta(b1);
-    n.inserisci_bicicletta(b2);
-    n.inserisci_bicicletta(b3);
-    cout<<n.isEmpty();
-    n.stampa();
-    n.salva_dati();
-    cout<< b1.serializza();
-    cout<< b2.serializza();
-    cout<< b3.serializza();
+//    n.inserisci_bicicletta(b1);
+//    n.inserisci_bicicletta(b2);
+//    n.inserisci_bicicletta(b3);
+//    cout<<n.isEmpty();
+//    n.stampa();
+//    n.salva_dati();
+//    cout<< b1.serializza();
+//    cout<< b2.serializza();
+//    cout<< b3.serializza();
    // Bicicletta *b_parsed=b1.parse(b1.serializza());
     //b_parsed->stampa();
 
-
+//    Bicicletta b1;Bicicletta b2(b1);
+//    b1.stampa();
+//    b2.stampa();
 
     cout<< "\n NEGOZIO CARICAMENTO DATI \n";
     n.carica_dati(NOME_FILE);

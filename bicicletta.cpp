@@ -11,9 +11,8 @@ Bicicletta::Bicicletta(const Bicicletta& b){
     lunghezza=b.lunghezza;
     quantita=b.quantita;
     prezzo=b.prezzo;
-
-
 }
+
 Bicicletta::~Bicicletta(){}
 
 ostream& operator << (ostream& os, const Bicicletta& b){
@@ -118,41 +117,55 @@ string Bicicletta::serializza() const{
 }
 
 
-Bicicletta* Bicicletta::parse(string riga) {   //da controllare
+Bicicletta& Bicicletta::parse(string& riga) {   //da controllare
 
-    string array_temp[6];
+    string array_temp[7];
 
     int pos = 0,i=0;
     std::string token;
     while (((pos = riga.find(':')) != std::string::npos)&&(i!=6)) {   //npos~= -1 -> significa che il find è fallito
-        i=i+1;
+
         token = riga.substr(0, pos);
         array_temp[i] = token;
         riga.erase(0, pos + 1);
+        i=i+1;
     }
+    array_temp[6] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
+    //FINE ESPLOSIONE
+
+
+    //parto da array_temp[1] perchè array_temp[0] contiene [<tipo>]
 
     float lunghezza;
-    stringstream convertLunghezza(array_temp[2]);
+    stringstream convertLunghezza(array_temp[3]);
     if ( !(convertLunghezza >> lunghezza) )
         lunghezza=0;
 
     float altezza;
-    stringstream convertAltezza(array_temp[3]);
+    stringstream convertAltezza(array_temp[4]);
     if ( !(convertAltezza >> altezza) )
         altezza=0;
 
     int quantita;
-    stringstream convertQuantita(array_temp[4]);
+    stringstream convertQuantita(array_temp[5]);
     if ( !(convertQuantita >> quantita) )
         quantita=0;
 
     double prezzo;
-    stringstream convertPrezzo(array_temp[5]);
+    stringstream convertPrezzo(array_temp[6]);
     if ( !(convertPrezzo >> prezzo) )
         prezzo=0;
 
-     array_temp[5] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
-     return new Bicicletta(array_temp[0],array_temp[1],lunghezza,altezza,quantita,prezzo);
+    cout << "1. " << array_temp[1]  << endl <<
+            "2. " << array_temp[2]  << endl <<
+            "3. " << lunghezza      << endl <<
+            "4. " << altezza        << endl <<
+            "5. " << quantita       << endl <<
+            "6. " << prezzo         << endl;
+
+    Bicicletta b_(array_temp[1],array_temp[2],lunghezza,altezza,quantita,prezzo);
+    return b_;
+
 
 }
 

@@ -21,7 +21,7 @@ public:
     void setPeso(double);
     void modifica(const Bicicletta&);
     string serializza() const;
-    static Bicicletta* parse(string);
+    static BiciDaCorsa& parse(string&);
 
 private:
     string specialita;    //crono, strada, Pista

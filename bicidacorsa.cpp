@@ -62,8 +62,8 @@ string BiciDaCorsa::serializza() const{
 }
 
 
-Bicicletta* BiciDaCorsa::parse(string riga){//da controllare
-    Bicicletta b( *(Bicicletta::parse(riga)));
+BiciDaCorsa& BiciDaCorsa::parse(string& riga){//da controllare
+    Bicicletta b( Bicicletta::parse(riga));
     //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
     string array_temp[3];
 
@@ -77,12 +77,13 @@ Bicicletta* BiciDaCorsa::parse(string riga){//da controllare
     }
 
     double peso;
+    array_temp[2] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
     stringstream convertPeso(array_temp[2]);
     if ( !(convertPeso >> peso) )
         peso=0;
 
-     array_temp[5] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
-     return new BiciDaCorsa(b,array_temp[1],array_temp[2],peso);
 
+     BiciDaCorsa b_(b,array_temp[1],array_temp[2],peso);
+    return b_;
 }
 

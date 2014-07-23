@@ -44,7 +44,7 @@ public:
 
 
     virtual string serializza() const;
-    static Bicicletta* parse(string);
+    static Bicicletta& parse(string&);
 private:
     string marca;
     string modello;
