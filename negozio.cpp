@@ -36,27 +36,30 @@ void Negozio::carica_dati(const char* str="") throw(Ecc_File_Non_Trovato){ //PRO
     else{
         ifstream input_file;
         input_file.open(NOME_FILE);
-
         //1. prendo la riga
         string riga = "";
         int indice_delimiter=0;
-        while (!input_file.eof()||indice_delimiter==riga.find('\n'))
+        int indice_fine_riga=riga.find('\n');
+        while (!input_file.eof())
         {
-            cout << riga << endl;
-
             getline(input_file, riga);
             indice_delimiter=riga.find(':');
+            if(indice_delimiter==std::string::npos)
+                indice_delimiter=indice_fine_riga;
+
             //2. estrapolo [tipo]
+
             string tipo=riga.substr(0,riga.find(':'));  //ritorna il primo token prima dei ':'
             if(tipo=="[Bicicletta]"){
 
-                cout << ">>>"<<riga << endl;
 
-                 inserisci_bicicletta(Bicicletta::parse(riga));
+                Bicicletta b_=Bicicletta::parse(riga);
+
+                b_.stampa();
+                //inserisci_bicicletta(Bicicletta::parse(riga));
                 // cout<<" tipo: <<Bicicletta>> \n";
                 // //riga.erase(0, indice_delimiter + 1);//rimuovo il token del tipo per avere la riga pulita
 
-                cout << "<<<" << riga << endl;
 
 
             }/*

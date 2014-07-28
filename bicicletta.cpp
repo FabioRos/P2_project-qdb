@@ -5,13 +5,8 @@ Bicicletta::Bicicletta():marca("white_label"),modello("sconosciuto"), lunghezza(
 Bicicletta::Bicicletta(string ma, string mo, float l, float a, int q=1, double p=-1):
     marca(ma),modello(mo),lunghezza(l),altezza(a),quantita(q),prezzo(p){}
 
-Bicicletta::Bicicletta(const Bicicletta& b){
-    marca=b.marca;
-    modello=b.modello;
-    lunghezza=b.lunghezza;
-    quantita=b.quantita;
-    prezzo=b.prezzo;
-}
+Bicicletta::Bicicletta(const Bicicletta& b):
+    marca(b.marca),modello(b.modello),lunghezza(b.lunghezza),altezza(b.altezza),quantita(b.quantita),prezzo(b.prezzo){}
 
 Bicicletta::~Bicicletta(){}
 
@@ -20,11 +15,12 @@ ostream& operator << (ostream& os, const Bicicletta& b){
     return os;
 }
 void Bicicletta::stampa() const{
-    cout<<"Marca: \t"<< getMarca()<<endl
-       <<"Modello: \t"<< getModello()<<endl
-      <<"lunghezza: \t"<< getLunghezza()<<endl
-     <<"Altezza: \t"<< getAltezza()<<endl
-    <<"Quantità: \t"<< getQuantita()<<endl;
+    cout<<"Marca: \t"       << getMarca()   <<endl
+        <<"Modello: \t"     << getModello() <<endl
+        <<"lunghezza: \t"   << getLunghezza()<<endl
+        <<"Altezza: \t"     << getAltezza() <<endl
+        <<"Quantità: \t"    << getQuantita()<<endl
+        <<"Prezzo: \t"      << getPrezzo()  <<endl;
 }
 
 string Bicicletta::getMarca() const throw(){
@@ -156,14 +152,8 @@ Bicicletta& Bicicletta::parse(string& riga) {   //da controllare
     if ( !(convertPrezzo >> prezzo) )
         prezzo=0;
 
-    cout << "1. " << array_temp[1]  << endl <<
-            "2. " << array_temp[2]  << endl <<
-            "3. " << lunghezza      << endl <<
-            "4. " << altezza        << endl <<
-            "5. " << quantita       << endl <<
-            "6. " << prezzo         << endl;
-
     Bicicletta b_(array_temp[1],array_temp[2],lunghezza,altezza,quantita,prezzo);
+    //b_.stampa();// --> b_ è ok
     return b_;
 
 
