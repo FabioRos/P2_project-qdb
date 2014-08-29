@@ -63,7 +63,7 @@ string BiciDaCorsa::serializza() const{
 
 
 BiciDaCorsa& BiciDaCorsa::parse(string& riga){//da controllare
-    Bicicletta b( Bicicletta::parse(riga));
+    Bicicletta b( *(Bicicletta::parse(riga)));
     //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
     string array_temp[3];
 

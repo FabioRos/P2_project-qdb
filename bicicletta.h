@@ -44,7 +44,7 @@ public:
 
 
     virtual string serializza() const;
-    static Bicicletta& parse(string&);
+    static Bicicletta* parse(const string&); // creo una bicicletta con new e ritorno il puntatore
 private:
     string marca;
     string modello;

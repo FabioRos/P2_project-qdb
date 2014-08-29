@@ -34,6 +34,7 @@ void Negozio::modifica_bicicletta(const Bicicletta& b){
 void Negozio::carica_dati(const char* str="") throw(Ecc_File_Non_Trovato){ //PROBLEMATICA
     if(!str)throw(Ecc_File_Non_Trovato());
     else{
+
         ifstream input_file;
         input_file.open(NOME_FILE);
         //1. prendo la riga
@@ -53,25 +54,23 @@ void Negozio::carica_dati(const char* str="") throw(Ecc_File_Non_Trovato){ //PRO
             if(tipo=="[Bicicletta]"){
 
 
-                Bicicletta b_=Bicicletta::parse(riga);
-
-                b_.stampa();
+                Bicicletta* b_=Bicicletta::parse(riga);
                 //inserisci_bicicletta(Bicicletta::parse(riga));
                 // cout<<" tipo: <<Bicicletta>> \n";
                 // //riga.erase(0, indice_delimiter + 1);//rimuovo il token del tipo per avere la riga pulita
 
-
-
-            }/*
-            if(tipo=="[BiciComuni]"){
-                BiciComuni bici_da_inserire=BiciComuni::parse(riga);
-                const_cast<Negozio*>(this)->inserisci_bicicletta(bici_da_inserire);
+            }
+           if(tipo=="[BiciComuni]"){
+               cout<<"Riga_negozio: "<<riga<<"END"<<endl;
+               BiciComuni* bici_da_inserire=BiciComuni::parse(riga);
+               /* const_cast<Negozio*>(this)->inserisci_bicicletta(bici_da_inserire);
                 cout<<" tipo: <<[BiciComuni]>> \n";
 
                 riga.erase(0, indice_delimiter + 1);
                 riga.erase(0, riga.find(':') + 1);    //devo togliere anche il tipo del sottooggetto bicicletta
-            }
-            if(tipo=="[BiciDaCorsa]"){
+            */}
+
+        /*    if(tipo=="[BiciDaCorsa]"){
 //                BiciDaCorsa bici_da_inserire=*(const_cast<Bicicletta*>(Bicicletta::parse(riga)));
 //                const_cast<Negozio*>(this)->inserisci_bicicletta(bici_da_inserire);
 //                cout<<" tipo: <<[BiciDaCorsa]>> \n";

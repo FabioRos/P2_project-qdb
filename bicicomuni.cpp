@@ -85,18 +85,32 @@ string BiciComuni::serializza() const{
 
 }
 
-BiciComuni& BiciComuni::parse(string& riga) {//da controllare
-    Bicicletta b( Bicicletta::parse(riga));
-    //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
-    string array_temp[5];
+BiciComuni* BiciComuni::parse(const string& riga) {//da controllare
+   //tolgo "[Bicicletta]:"
+    string & rigac=const_cast<string&>(riga);
+    int pos = rigac.find(':');
+    rigac.erase(0, pos+1);
+    cout<<rigac<<endl;
 
-    int pos = 0,i=0;
+    Bicicletta* b= Bicicletta::parse(rigac);
+    //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
+    b->stampa();
+
+    string array_temp[5];
+    pos = 0;
+    int i=0;
     std::string token;
+    pos = rigac.find(':');
+
     while ((pos = riga.find(':')) != std::string::npos) {   //npos~= -1 -> significa che il find(':') è fallito
-        i=i+1;
-        token = riga.substr(0, pos);
+        token = rigac.substr(0, pos);
+
+        cout<<'T'<<i<<' '<<token<<endl;
+
         array_temp[i] = token;
-        riga.erase(0, pos + 1);
+        rigac.erase(0, pos+1);
+        i=i+1;
+        pos = rigac.find(':');
     }
     array_temp[4] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
     bool cestino;
@@ -120,7 +134,11 @@ BiciComuni& BiciComuni::parse(string& riga) {//da controllare
     if ( !(conv_fanale >> fanale) )
         fanale=0;
 
-    BiciComuni b_(b,cestino,seggiolino,portapacchi,copricatena,fanale);
-     return b_;
+//    BiciComuni test(b,cestino,seggiolino,portapacchi,copricatena,fanale);
+//    test.stampa();
+
+    cout<<"ok";
+    return new BiciComuni(*b,cestino,seggiolino,portapacchi,copricatena,fanale);
+
 
 }

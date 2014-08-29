@@ -113,22 +113,23 @@ string Bicicletta::serializza() const{
 }
 
 
-Bicicletta& Bicicletta::parse(string& riga) {   //da controllare
+Bicicletta* Bicicletta::parse(const string &riga) {   //OK
 
     string array_temp[7];
 
     int pos = 0,i=0;
-    std::string token;
-    while (((pos = riga.find(':')) != std::string::npos)&&(i!=6)) {   //npos~= -1 -> significa che il find è fallito
-
-        token = riga.substr(0, pos);
+    string token;
+    pos = riga.find(':');
+    string & rigac=const_cast<string&>(riga);
+    while ((pos != std::string::npos)&&(i!=6)) {   //npos~= -1 -> significa che il find è fallito
+        token = rigac.substr(0, pos);
         array_temp[i] = token;
-        riga.erase(0, pos + 1);
+        rigac.erase(0, pos+1);
         i=i+1;
+        pos = rigac.find(':');
     }
     array_temp[6] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
     //FINE ESPLOSIONE
-
 
     //parto da array_temp[1] perchè array_temp[0] contiene [<tipo>]
 
@@ -152,10 +153,11 @@ Bicicletta& Bicicletta::parse(string& riga) {   //da controllare
     if ( !(convertPrezzo >> prezzo) )
         prezzo=0;
 
-    Bicicletta b_(array_temp[1],array_temp[2],lunghezza,altezza,quantita,prezzo);
-    //b_.stampa();// --> b_ è ok
+    Bicicletta *b_= new Bicicletta(array_temp[1],array_temp[2],lunghezza,altezza,quantita,prezzo);
+    //cout<<endl;b_->stampa();
     return b_;
 
 
 }
+
 

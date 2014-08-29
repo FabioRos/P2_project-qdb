@@ -1,17 +1,14 @@
 #include <iostream>
-#include "container.h"
+//#include "container.h"
 #include "negozio.h"
+#include "bicicletta.h"
 
-
-#include <QApplication>
-#include <QIcon>
-
-using namespace std;
-
-#include <iostream>
-#include "container.h"
-#include "finestra_principale.h"
+//#include <QApplication>
+//#include <QIcon>
+//#include "finestra_principale.h"
 /*
+
+
 int main(int argc, char* argv[]){
 
 
@@ -24,13 +21,6 @@ int main(int argc, char* argv[]){
     Pannello.show();    //show() è virtuale di qWidget e implementato da qMainWindow
     QObject::connect(qApp,SIGNAL(lastWindowClosed()),qApp,SLOT(quit()));
     return QApplication::exec();
-
-
-
-
-
-
-
 
 
 */
@@ -72,7 +62,7 @@ int main(){
 
     Negozio.stampa();*/
 
-//    Bicicletta b1;
+   Bicicletta b1;
 //    BiciDaCorsa b2(b1,"crono","carbonio",7.3);
 //    BiciComuni b3(b1,true,false,false,true,true);
 //    b1.stampa();
@@ -85,11 +75,11 @@ int main(){
 //    cout<<n.isEmpty();
 //    n.stampa();
 //    n.salva_dati();
-//    cout<< b1.serializza();
+    //cout<< b1.serializza();
 //    cout<< b2.serializza();
 //    cout<< b3.serializza();
-   // Bicicletta *b_parsed=b1.parse(b1.serializza());
-    //b_parsed->stampa();
+   //   Bicicletta *b_parsed=b1.parse(b1.serializza());
+     //   b_parsed->stampa();
 
 //    Bicicletta b1;Bicicletta b2(b1);
 //    b1.stampa();
