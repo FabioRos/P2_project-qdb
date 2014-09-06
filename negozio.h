@@ -23,19 +23,13 @@ public:
     void rimuovi_bicicletta(const Bicicletta&);
     void modifica_bicicletta(const Bicicletta&);
     Container<Bicicletta*> cerca_bicicletta(const Bicicletta&) const;    //Restituisco un contenitore con i puntatori
+    Bicicletta* getBicicletta(int) const;
     Container<Bicicletta*> getAll() const;
     //fai cerca per marca, tipo, ....
 
     void stampa() const;
     bool isEmpty() const;
 
-
-    //r/w
-
-    void salva_dati();  //sul serialize manda le cose senza il tipo iniziale, usao per capire e chiama quello giusto!
-    void carica_dati(const char*)  throw(Ecc_File_Non_Trovato);
-   // string getLineByFile(string,int) const;
-    //static string OttieniToken(string s);
 
 private:
     Container<Bicicletta*> shop;

@@ -1,6 +1,6 @@
 #include "record.h"
 
-record::record(Bicicletta* b):ptrQuestaBici(b){
+record::record(Bicicletta* b/*, int riga_corrente*/):ptrQuestaBici(b)/*,n_riga(riga_corrente)*/{
     if(!b) throw errore();
     marca=new QLineEdit(QString::fromStdString(b->getMarca()));
     //ora connetto il segnale "textChanged(QString)" di 'marca' con il mio SLOT "marca_changed(Qstring)"
@@ -14,11 +14,9 @@ record::record(Bicicletta* b):ptrQuestaBici(b){
     altezza->setValue(b->getAltezza());
     connect(altezza,SIGNAL(valueChanged(double)),this,SLOT(altezza_changed(double)));
     prezzo=new QDoubleSpinBox();
+    prezzo->setMaximum(99999);
     prezzo->setValue(b->getPrezzo());
     connect(prezzo,SIGNAL(valueChanged(double)),this,SLOT(prezzo_changed(double)));
-    quantita=new QSpinBox();
-    quantita->setValue(b->getQuantita());
-    connect(quantita,SIGNAL(valueChanged(int)),this,SLOT(quantita_changed(int)));
     //Campi di Bici Comuni
     cestino=new QCheckBox();
     connect(cestino,SIGNAL(stateChanged(int)),this,SLOT(cestino_changed(int)));
@@ -60,7 +58,7 @@ record::record(Bicicletta* b):ptrQuestaBici(b){
     }
     //eliminazione
      elimina=new QPushButton("elimina");
-     connect(elimina,SIGNAL(clicked(bool)),this,SLOT(elimina_clicked(bool)));
+     connect(elimina,SIGNAL(clicked()),this,SLOT(eliminariga()));
 }
 
 record::~record(){
@@ -68,7 +66,6 @@ record::~record(){
     delete modello;
     delete lunghezza;
     delete altezza;
-    delete quantita;
     delete prezzo;
     delete cestino;
     delete seggiolino;
@@ -87,10 +84,6 @@ void record::marca_changed ( QString txt){
 
 void record::modello_changed ( QString txt){
     ptrQuestaBici->setModello(txt.toStdString());
-}
-
-void record::quantita_changed(int d ){
-        ptrQuestaBici->aggiungi(d);
 }
 
 void record::specialita_changed ( QString txt){
@@ -145,13 +138,11 @@ void record::fanale_changed(int d ){
         p->setFanale(d);
 }
 
-void record::elimina_clicked(bool){
-        delete ptrQuestaBici;
+void record::eliminariga(){
+    emit eliminariga(this);
 }
 
-/*
-*   Definizione Widgets
-*/
+/*Definizione Widgets*/
 
 QWidget *record::WidgetMarca() const{
     return marca;
@@ -164,9 +155,6 @@ QWidget *record::WidgetLunghezza() const{
 }
 QWidget *record::WidgetAltezza() const{
     return altezza;
-}
-QWidget *record::WidgetQuantita() const{
-    return quantita;
 }
 QWidget *record::WidgetPrezzo() const{
     return prezzo;
@@ -199,5 +187,4 @@ QWidget *record::WidgetPeso() const{
 QWidget * record::WidgetElimina(){
     return elimina;
 }
-
 

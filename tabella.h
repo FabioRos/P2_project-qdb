@@ -15,11 +15,12 @@ class tabella : public QTableWidget
     void inserisci_riga(record*riga);
 public:
     explicit tabella(Negozio* n, QWidget *parent = 0);
-    void aggiorna();
+
 signals:
 
 public slots:
-
+    void eliminaRiga(record*);
+    void aggiorna();
 };
 
 #endif // TABELLA_H

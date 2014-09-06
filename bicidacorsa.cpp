@@ -2,7 +2,15 @@
 
 BiciDaCorsa::BiciDaCorsa(){
 }
-BiciDaCorsa::BiciDaCorsa(const Bicicletta &b,string s,string m,double p):Bicicletta(b),specialita(s),materiale(m),peso(p){}
+BiciDaCorsa::BiciDaCorsa(string marca_, string mod_, float lung_, float alt_, double prezzo, string s, string m, double p)
+     : Bicicletta(marca_, mod_, lung_,alt_,prezzo),specialita(s),materiale(m),peso(p){
+
+}
+
+BiciDaCorsa::BiciDaCorsa(const Bicicletta& b, string s, string m, double p)
+:Bicicletta(b),specialita(s),materiale(m),peso(p){}
+
+
 
 string BiciDaCorsa::getSpecialita() const{
     return this->specialita;
@@ -49,42 +57,5 @@ void BiciDaCorsa::modifica(const Bicicletta& b){
       materiale=bc->materiale;
       peso=bc->peso;
     }
-}
-
-string BiciDaCorsa::serializza() const{
-
-    std::ostringstream p;
-    p << peso;
-    string Str_peso = p.str();
-    string biciBase=Bicicletta::serializza();
-    biciBase=biciBase.substr(0,biciBase.length()-1);    //tolgo il \n
-    string s="[BiciDaCorsa]:"+biciBase+":"+specialita+":"+materiale+":"+Str_peso+"\n";
-    return s;
-}
-
-
-BiciDaCorsa& BiciDaCorsa::parse(string& riga){//da controllare
-    Bicicletta b( *(Bicicletta::parse(riga)));
-    //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
-    string array_temp[3];
-
-    int pos = 0,i=0;
-    std::string token;
-    while ((pos = riga.find(':')) != std::string::npos) {   //npos~= -1 -> significa che il find è fallito
-        i=i+1;
-        token = riga.substr(0, pos);
-        array_temp[i] = token;
-        riga.erase(0, pos + 1);
-    }
-
-    double peso;
-    array_temp[2] = riga; //siccome ogni volta tolgo il pezzo che ho preso, stampo quello finale.
-    stringstream convertPeso(array_temp[2]);
-    if ( !(convertPeso >> peso) )
-        peso=0;
-
-
-     BiciDaCorsa b_(b,array_temp[1],array_temp[2],peso);
-    return b_;
 }
 

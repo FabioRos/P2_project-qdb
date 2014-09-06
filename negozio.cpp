@@ -31,85 +31,16 @@ void Negozio::modifica_bicicletta(const Bicicletta& b){
     modifica_bicicletta(b);
 }
 
-void Negozio::carica_dati(const char* str="") throw(Ecc_File_Non_Trovato){ //PROBLEMATICA
-    if(!str)throw(Ecc_File_Non_Trovato());
-    else{
-
-        ifstream input_file;
-        input_file.open(NOME_FILE);
-        //1. prendo la riga
-        string riga = "";
-        int indice_delimiter=0;
-        int indice_fine_riga=riga.find('\n');
-        while (!input_file.eof())
-        {
-            getline(input_file, riga);
-            indice_delimiter=riga.find(':');
-            if(indice_delimiter==std::string::npos)
-                indice_delimiter=indice_fine_riga;
-
-            //2. estrapolo [tipo]
-
-            string tipo=riga.substr(0,riga.find(':'));  //ritorna il primo token prima dei ':'
-            if(tipo=="[Bicicletta]"){
-
-
-                Bicicletta* b_=Bicicletta::parse(riga);
-                //inserisci_bicicletta(Bicicletta::parse(riga));
-                // cout<<" tipo: <<Bicicletta>> \n";
-                // //riga.erase(0, indice_delimiter + 1);//rimuovo il token del tipo per avere la riga pulita
-
-            }
-           if(tipo=="[BiciComuni]"){
-               cout<<"Riga_negozio: "<<riga<<"END"<<endl;
-               BiciComuni* bici_da_inserire=BiciComuni::parse(riga);
-               /* const_cast<Negozio*>(this)->inserisci_bicicletta(bici_da_inserire);
-                cout<<" tipo: <<[BiciComuni]>> \n";
-
-                riga.erase(0, indice_delimiter + 1);
-                riga.erase(0, riga.find(':') + 1);    //devo togliere anche il tipo del sottooggetto bicicletta
-            */}
-
-        /*    if(tipo=="[BiciDaCorsa]"){
-//                BiciDaCorsa bici_da_inserire=*(const_cast<Bicicletta*>(Bicicletta::parse(riga)));
-//                const_cast<Negozio*>(this)->inserisci_bicicletta(bici_da_inserire);
-//                cout<<" tipo: <<[BiciDaCorsa]>> \n";
-
-                riga.erase(0, indice_delimiter + 1);
-                riga.erase(0, riga.find(':') + 1);
-            }
-
-*/
-
-
+Bicicletta* Negozio::getBicicletta(int n) const {
+    Bicicletta* tmp = 0;
+    if (n!=0){
+        for(Container<Bicicletta*>::Iteratore it = shop.begin(); it != shop.end() && n>1; --n, ++it){
+            tmp = *it;
         }
-
-        input_file.close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // string tipo=riga.substr(0, pos = riga.find(':'));
-
-        //3.mando la stringa senza quel pezzo dal parser giusto
-
-
-
-
-
     }
-
-
+    return tmp;
 }
+
 ostream& operator<< (ostream& os, const Negozio& n){
     n.stampa();
     return os;
@@ -126,19 +57,6 @@ void Negozio::stampa() const{
 
 
 }
-
-// r_w
-
-void Negozio::salva_dati(){ //ok
-    ofstream stream_di_output_su_file;
-    stream_di_output_su_file.open(NOME_FILE);
-    for(Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++)
-        stream_di_output_su_file<<shop[it]->serializza();
-    stream_di_output_su_file<<"ASDASDDSASDADSA";
-    stream_di_output_su_file.close();
-    cout<<"done"<<endl;
-}
-
 Container<Bicicletta*> Negozio::cerca_bicicletta(const Bicicletta& item) const{
     Container<Bicicletta*> db_temporaneo_risultati;
     for(Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++){

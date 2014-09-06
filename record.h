@@ -7,19 +7,20 @@
 #include "bicicletta.h"
 #include "bicicomuni.h"
 #include "bicidacorsa.h"
+#include "container.h"
+#include "negozio.h"
 /**
  * @brief Classe che gestisce i record in comune a tutte le bici
  */
 class record: public QObject    //per poter usare i connect
-{private:
+{
+private:
     Q_OBJECT
     QLineEdit* marca;
     QLineEdit* modello;
     QDoubleSpinBox* lunghezza;
     QDoubleSpinBox* altezza;
-    QSpinBox* quantita;
     QDoubleSpinBox* prezzo;
-    Bicicletta* ptrQuestaBici;
     //Campi di Bici Comuni
     QCheckBox* cestino, *seggiolino, *portapacchi, *copricatena, *fanale;
     //Campi di Bici da corsa
@@ -28,6 +29,9 @@ class record: public QObject    //per poter usare i connect
     QDoubleSpinBox* peso;
     QPushButton* elimina;
 
+    int n_riga;
+    Bicicletta* ptrQuestaBici;
+    Negozio* shop;
 private slots:  //solo ad uso di questa classe
     //QLineEdit
     void marca_changed ( QString);
@@ -45,12 +49,12 @@ private slots:  //solo ad uso di questa classe
     void portapacchi_changed(int d );
     void copricatena_changed(int d );
     void fanale_changed(int d );
-
-    void quantita_changed(int d );
-    void elimina_clicked(bool);
+    void eliminariga();
+signals:
+    void eliminariga(record*);
 
 public:
-    record(Bicicletta* );
+    record(Bicicletta* /*,int*/);
     ~record();
     QWidget* WidgetMarca()const;
     QWidget* WidgetModello()const;

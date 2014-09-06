@@ -18,9 +18,19 @@ int main(int argc, char* argv[]){
     Negozio rivenditore;
     BiciDaCorsa *bcorsa=new BiciDaCorsa();
     rivenditore.inserisci_bicicletta(*bcorsa);
-
+    BiciDaCorsa *bcorsa2=new BiciDaCorsa();
+    rivenditore.inserisci_bicicletta(*bcorsa2);
     BiciComuni *bcomune=new BiciComuni();
     rivenditore.inserisci_bicicletta(*bcomune);
+    BiciDaCorsa *bcorsa3=new BiciDaCorsa();
+    rivenditore.inserisci_bicicletta(*bcorsa3);
+    BiciDaCorsa *bcorsa4=new BiciDaCorsa();
+    rivenditore.inserisci_bicicletta(*bcorsa4);
+    BiciDaCorsa *bcorsa5=new BiciDaCorsa();
+    rivenditore.inserisci_bicicletta(*bcorsa5);
+
+    BiciComuni *bcomune2=new BiciComuni();
+    rivenditore.inserisci_bicicletta(*bcomune2);
 
     Finestra_Principale Pannello(rivenditore,0);
 
