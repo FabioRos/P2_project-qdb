@@ -5,9 +5,6 @@ Bicicletta::Bicicletta():marca("white_label"),modello("sconosciuto"), lunghezza(
 Bicicletta::Bicicletta(string ma, string mo, float l, float a, int q=1, double p=-1):
     marca(ma),modello(mo),lunghezza(l),altezza(a),quantita(q),prezzo(p){}
 
-Bicicletta::Bicicletta(const Bicicletta& b):
-    marca(b.marca),modello(b.modello),lunghezza(b.lunghezza),altezza(b.altezza),quantita(b.quantita),prezzo(b.prezzo){}
-
 Bicicletta::~Bicicletta(){}
 
 ostream& operator << (ostream& os, const Bicicletta& b){

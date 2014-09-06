@@ -26,7 +26,7 @@ private:
         Nodo* operator->() const;
         bool operator==(const SmartP&)const;
         bool operator!=(const SmartP&)const;
-        SmartP& operator++();
+//        SmartP& operator++();
     };//SMARTP END
 
     class Nodo{
@@ -39,7 +39,7 @@ private:
     };//NODO END
 
     SmartP first;   //primo elemento della lista
-//parte pubblica
+    //parte pubblica
 public:
     Container();
     Container(const SmartP& smp);
@@ -49,17 +49,19 @@ public:
     bool sostituisciElemento(const T&,const T&);
     //SmartP cercaElemento(const T&);               //restituisco il puntatore all'elemento
     void stampa() const;
+    void rimuovi_tutto();
 
     class Iteratore{
         friend class Container;
-        private:
-            SmartP punt;
-        public:
-            bool operator==(Iteratore);
-            bool operator!=(Iteratore);
-            Iteratore& operator++();    //prefisso
-            Iteratore& operator++(int); //postfisso
-            T& operator*();
+    private:
+        SmartP punt;
+    public:
+        Iteratore(SmartP =0);
+        bool operator==(Iteratore);
+        bool operator!=(Iteratore);
+        Iteratore& operator++();    //prefisso
+        Iteratore& operator++(int); //postfisso
+        T& operator*();
     };//ITERATORE END
     Iteratore begin() const;
     Iteratore end() const;
@@ -141,12 +143,14 @@ bool Container<T>::SmartP::operator!=(const SmartP& ptr)const{
     return punt!=ptr.punt;
 }
 
-template <class T>
+
+/*template <class T>
 typename Container<T>::SmartP& Container<T>::SmartP::operator++(){
     punt->riferimenti--;
-    punt=punt->next;
-    punt->riferimenti++;
-}
+    punt= punt->next;
+    if(punt != 0)
+        punt->riferimenti++;
+}*/
 
 
 /************************************************************************************
@@ -203,8 +207,8 @@ bool Container<T>::rimuoviElemento(const T& elemento){ //rimuovo un elemento che
             first=p->next;
         else
             prec->next=p->next;
-            p->next=0;
-            //p->riferimenti--;     lo fa il distruttore di smartP, perchè p è locale alla funzione
+        p->next=0;
+        //p->riferimenti--;     lo fa il distruttore di smartP, perchè p è locale alla funzione
         return true;
     }
     return false;
@@ -238,9 +242,15 @@ typename Container<T>::SmartP Container<T>::cercaElemento(const T& elemento){
 */
 template <class T>
 void Container<T>::stampa() const{
-    //da fares
+    //da fare
 }
 
+template <class T>
+void Container<T>::rimuovi_tutto(){
+    SmartP p=first;
+    while(p!=0)
+       rimuoviElemento(*p);
+}
 
 /************************************************************************************
  *                                  Iteratore                                       *
@@ -257,8 +267,8 @@ bool Container<T>::Iteratore::operator!=(Iteratore it){
 
 template <class T>
 typename Container<T>::Iteratore& Container<T>::Iteratore::operator++(){  //prefisso
-    if(punt)
-        punt++;
+    if(punt!=0)
+        punt = punt->next;
     return *this;
     //altrimenti non fa nulla ed è quello che voglio.
 }
@@ -286,9 +296,8 @@ typename Container<T>::Iteratore Container<T>::begin() const{
 
 template <class T>
 typename Container<T>::Iteratore Container<T>::end() const{
-    Container<T>::Iteratore aux;
-    aux.punt=0;
-    return aux;
+
+    return Container<T>::Iteratore(0);
 }
 
 
@@ -300,5 +309,11 @@ T& Container<T>::operator[](Container<T>::Iteratore it) const{
         std::cerr<<"Non  posibile dereferenziare questo puntatore";
 }
 
+template<class T>
+Container<T>::Iteratore::Iteratore(Container<T>::SmartP p): punt(p) {}
+
+
 //Iteratore: fine implementazione
 #endif // CONTAINER_H
+
+

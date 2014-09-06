@@ -7,6 +7,7 @@
 #include <QtGui>
 //#include <QGroupBox>
 #include "negozio.h"
+#include "tabella.h"
 
 class Finestra_Principale : public QMainWindow{
     Q_OBJECT    //macro per gestire signal-slot

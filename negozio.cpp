@@ -19,7 +19,7 @@ void Negozio::inserisci_bicicletta(const Bicicletta& b){
 
 
 
-bool Negozio::isEmpty(){
+bool Negozio::isEmpty() const{
     return shop.isEmpty();
 }
 
@@ -110,6 +110,10 @@ void Negozio::carica_dati(const char* str="") throw(Ecc_File_Non_Trovato){ //PRO
 
 
 }
+ostream& operator<< (ostream& os, const Negozio& n){
+    n.stampa();
+    return os;
+}
 
 void Negozio::stampa() const{
 
@@ -130,9 +134,19 @@ void Negozio::salva_dati(){ //ok
     stream_di_output_su_file.open(NOME_FILE);
     for(Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++)
         stream_di_output_su_file<<shop[it]->serializza();
+    stream_di_output_su_file<<"ASDASDDSASDADSA";
     stream_di_output_su_file.close();
+    cout<<"done"<<endl;
 }
 
+Container<Bicicletta*> Negozio::cerca_bicicletta(const Bicicletta& item) const{
+    Container<Bicicletta*> db_temporaneo_risultati;
+    for(Container<Bicicletta*>::Iteratore it=shop.begin(); it != shop.end(); it++){
+        if(*(this->shop[it])==item)
+            db_temporaneo_risultati.aggiungiElemento(shop[it]);
+    }
+    return db_temporaneo_risultati;
+}
 
 //string Negozio::getLineByFile(string s, int offset) const{ //da finire
 //    string riga=EMPTY_PLACEHOLDER;
@@ -155,6 +169,9 @@ void Negozio::salva_dati(){ //ok
 //    }
 //}
 
+Container<Bicicletta*> Negozio::getAll() const{
+    return shop;
+}
 
 
 

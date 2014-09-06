@@ -1,3 +1,4 @@
+class errore{};
 
 class Ecc_tolti_troppi{public: Ecc_tolti_troppi();};
 

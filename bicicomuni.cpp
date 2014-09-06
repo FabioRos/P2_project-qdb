@@ -93,7 +93,7 @@ BiciComuni* BiciComuni::parse(const string& riga) {//da controllare
     cout<<rigac<<endl;
 
     Bicicletta* b= Bicicletta::parse(rigac);
-    //occhio che qui dovrebbe esserci un carattere ':' all'inizio, occhio a non tirare su token vuoti.
+    //occhio che ora la stringa inizia con un carattere ':' !!
     b->stampa();
 
     string array_temp[5];
@@ -102,10 +102,10 @@ BiciComuni* BiciComuni::parse(const string& riga) {//da controllare
     std::string token;
     pos = rigac.find(':');
 
-    while ((pos = riga.find(':')) != std::string::npos) {   //npos~= -1 -> significa che il find(':') è fallito
+    while ((pos = rigac.find(':')) != std::string::npos) {   //npos~= -1 -> significa che il find(':') è fallito
         token = rigac.substr(0, pos);
 
-        cout<<'T'<<i<<' '<<token<<endl;
+        cout<<'T'<<i<<' '<<token<<"riga rimanente ->  "<<rigac<<endl;
 
         array_temp[i] = token;
         rigac.erase(0, pos+1);
@@ -138,7 +138,11 @@ BiciComuni* BiciComuni::parse(const string& riga) {//da controllare
 //    test.stampa();
 
     cout<<"ok";
-    return new BiciComuni(*b,cestino,seggiolino,portapacchi,copricatena,fanale);
 
+   // return new BiciComuni(*b,cestino,seggiolino,portapacchi,copricatena,fanale);
+
+    BiciComuni* bc= new BiciComuni(*b,cestino,seggiolino,portapacchi,copricatena,fanale);
+    bc->stampa();
+    return bc;
 
 }

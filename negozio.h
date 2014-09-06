@@ -22,9 +22,12 @@ public:
     void inserisci_bicicletta(const Bicicletta&);
     void rimuovi_bicicletta(const Bicicletta&);
     void modifica_bicicletta(const Bicicletta&);
-    Container<Bicicletta> cerca_bicicletta(string) const;    //Restituisco un contenitore con i puntatori
+    Container<Bicicletta*> cerca_bicicletta(const Bicicletta&) const;    //Restituisco un contenitore con i puntatori
+    Container<Bicicletta*> getAll() const;
+    //fai cerca per marca, tipo, ....
+
     void stampa() const;
-    bool isEmpty();
+    bool isEmpty() const;
 
 
     //r/w

@@ -3,6 +3,7 @@
 BiciDaCorsa::BiciDaCorsa(){
 }
 BiciDaCorsa::BiciDaCorsa(const Bicicletta &b,string s,string m,double p):Bicicletta(b),specialita(s),materiale(m),peso(p){}
+
 string BiciDaCorsa::getSpecialita() const{
     return this->specialita;
 }

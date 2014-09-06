@@ -3,10 +3,10 @@
 #include "negozio.h"
 #include "bicicletta.h"
 
-//#include <QApplication>
-//#include <QIcon>
-//#include "finestra_principale.h"
-/*
+#include <QApplication>
+#include <QIcon>
+#include "finestra_principale.h"
+
 
 
 int main(int argc, char* argv[]){
@@ -16,6 +16,12 @@ int main(int argc, char* argv[]){
     QApplication app(argc,argv);
 
     Negozio rivenditore;
+    BiciDaCorsa *bcorsa=new BiciDaCorsa();
+    rivenditore.inserisci_bicicletta(*bcorsa);
+
+    BiciComuni *bcomune=new BiciComuni();
+    rivenditore.inserisci_bicicletta(*bcomune);
+
     Finestra_Principale Pannello(rivenditore,0);
 
     Pannello.show();    //show() è virtuale di qWidget e implementato da qMainWindow
@@ -23,7 +29,8 @@ int main(int argc, char* argv[]){
     return QApplication::exec();
 
 
-*/
+
+/*
 
 int main(){
     //cout << "OK" << endl;
@@ -37,8 +44,8 @@ int main(){
 
 
   /*  Bicicletta b;
-    //cout<< b;
-    Bicicletta b2("Pinarello","Dogma",58,56,10,350);*/
+    //cout<< b;*/
+   // Bicicletta b2("Pinarello","Dogma",58,56,10,350);
    /* cout<<" Marca b2:"<<b2.getMarca()<<endl;
     cout<<" Modello b2:"<<b2.getModello()<<endl;
     cout<<" Altezza b2:"<<b2.getAltezza()<<endl;
@@ -61,30 +68,53 @@ int main(){
     cout<<" vuoto? " <<Negozio.isEmpty()<<endl;
 
     Negozio.stampa();*/
-
+/*
    Bicicletta b1;
-//    BiciDaCorsa b2(b1,"crono","carbonio",7.3);
-//    BiciComuni b3(b1,true,false,false,true,true);
-//    b1.stampa();
-//    b2.stampa();
-//    b3.stampa();
+   BiciDaCorsa b2(b1,"crono","carbonio",7.3);
+   BiciComuni b3(b1,true,false,false,true,true);
+  //  b1.stampa();
+  //  b2.stampa();
+  //  b3.stampa();
     Negozio n;
-//    n.inserisci_bicicletta(b1);
-//    n.inserisci_bicicletta(b2);
-//    n.inserisci_bicicletta(b3);
+   n.inserisci_bicicletta(b1);
+   n.inserisci_bicicletta(b2);
+   n.inserisci_bicicletta(b3);
+   cout<<n;
 //    cout<<n.isEmpty();
 //    n.stampa();
 //    n.salva_dati();
-    //cout<< b1.serializza();
-//    cout<< b2.serializza();
-//    cout<< b3.serializza();
-   //   Bicicletta *b_parsed=b1.parse(b1.serializza());
-     //   b_parsed->stampa();
+*/
+/*
 
-//    Bicicletta b1;Bicicletta b2(b1);
-//    b1.stampa();
-//    b2.stampa();
+*/
+/*
+    cout<<"\nTest salvataggio"<<endl;
+    n.inserisci_bicicletta(b1);
+    n.inserisci_bicicletta(b2);
+    n.inserisci_bicicletta(b3);
+    n.inserisci_bicicletta(b3);
+    n.inserisci_bicicletta(b3);
+    n.inserisci_bicicletta(b3);
+    n.salva_dati();
 
-    cout<< "\n NEGOZIO CARICAMENTO DATI \n";
-    n.carica_dati(NOME_FILE);
+
+    cout<< b1.serializza();
+    cout<< b2.serializza();
+    cout<< b3.serializza();*/
+/*
+    Bicicletta *b_parsed=b1.parse(b1.serializza());
+    b_parsed->stampa();
+
+    Bicicletta b1;Bicicletta b2(b1);
+    b1.stampa();
+    cout<<endl;
+    b2.stampa();
+*/
+
+
+    //cout<< "\n NEGOZIO CARICAMENTO DATI \n";
+    //n.carica_dati(NOME_FILE);
+
+
+
 }
