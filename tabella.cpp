@@ -1,8 +1,8 @@
 #include "tabella.h"
 
-tabella::tabella(Negozio *n, QWidget *parent) : ptrNegozio(n), QTableWidget(0,14,parent){
+tabella::tabella(Negozio *n, QWidget *parent) : ptrNegozio(n), QTableWidget(0,13,parent){
     QStringList sls;
-    sls<<"Marca"<<"Modello"<<"Lunghezza"<<"Altezza"<<"Prezzo"<<"Cestino"<<"Seggiolino"<<"Portapacchi"<<"Copricatena"<<"Fanale"<<"Specialita'"<<"Materiale"<<"Peso"<<"Elimina";
+    sls<<"Marca"<<"Modello"<<"Lunghezza"<<"Altezza"<<"Prezzo"<<"Cestino"<<"Seggiolino"<<"Portapacchi"<<"Copricatena"<<"Fanale"<<"Specialita'"<<"Materiale"<<"Peso";
     setHorizontalHeaderLabels(sls);
     setColumnWidth(0,90);
     setColumnWidth(1,90);
@@ -37,7 +37,6 @@ void tabella::inserisci_riga(record* riga){
     setCellWidget(a,10, riga->WidgetSpecialita() );
     setCellWidget(a,11, riga->WidgetMateriale() );
     setCellWidget(a,12, riga->WidgetPeso() );
-    setCellWidget(a,13, riga->WidgetElimina());
     setCurrentCell(a,0);
 }
 
@@ -47,24 +46,34 @@ void tabella::aggiorna(){
     for(int a=rowCount(); a>=0; --a){
         QTableWidget::removeRow(a);
     }
-    for(Container<record*>::Iteratore i=righe.begin();i!=righe.end();++i){
-        delete *i;
+    for(Container<record*>::Iteratore i=righe.begin(); i!=righe.end(); ++i){
+        record* r=*i;
+        delete r;
     }
-
+    righe=Container<record*>();
     //ora ripopolo con i nuovi
+    int indice=0;
     for(Container<Bicicletta*>::Iteratore i=db.begin();i!=db.end();++i){
-        record* r=new record(*i);
-        connect(r,SIGNAL(eliminariga(record*)),this,SLOT(eliminaRiga(record*)));
+        record* r=new record(*i,indice++);
         righe.aggiungiElemento(r);
         inserisci_riga(r);
     }
 }
 
-void tabella::eliminaRiga(record *r){
-    int i = QTableWidget::currentRow();
+void tabella::eliminaRiga(){
+    int i = currentRow();
+
     Bicicletta * tmp = ptrNegozio->getBicicletta(i);
-    righe.rimuoviElemento(r);
-    ptrNegozio->rimuovi_bicicletta(*tmp);
+    aggiorna();
+    //    Container<record*>::Iteratore it=righe.begin();
+    //    righe.rimuoviElemento(*(new record(tmp,i)));
+    //    ptrNegozio->rimuovi_bicicletta(*tmp);
+
     QTableWidget::removeRow(i);
 }
 
+tabella::~tabella(){
+for(Container<record*>::Iteratore it=righe.begin(); it!= righe.end(); ++it){
+    delete (*it);
+    }
+}

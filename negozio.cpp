@@ -66,29 +66,33 @@ Container<Bicicletta*> Negozio::cerca_bicicletta(const Bicicletta& item) const{
     return db_temporaneo_risultati;
 }
 
-//string Negozio::getLineByFile(string s, int offset) const{ //da finire
-//    string riga=EMPTY_PLACEHOLDER;
-//    ifstream infile(NOME_FILE);
-//    for(int i=0;i<=offset;i++)
-//        getline (infile,riga);
-//    return riga;
-//}
-
-//string OttieniToken(string s) {
-//    int i=s.size();
-//    if( i==0)
-//        return EMPTY_PLACEHOLDER;
-//    else{
-//        string aux="";
-//        for(;i<s.length() && s[i]!=':' && s[i]!='\n';++i){
-//            aux=aux+s[i];
-//        }
-//        return aux;
-//    }
-//}
-
 Container<Bicicletta*> Negozio::getAll() const{
     return shop;
+}
+
+Container<Bicicletta *> Negozio::ricerca_bicicletta(string tipo, string testo){
+    Container<Bicicletta*> aux;
+    if(tipo=="Bici da corsa"){
+        for(Container<Bicicletta*>::Iteratore it=shop.begin();it!=shop.end();++it){
+            if(dynamic_cast<BiciDaCorsa*>(*it) && (*it)->getMarca()==testo ||(*it)->getModello()==testo ){
+                aux.aggiungiElemento(*it);
+            }
+        }
+    }else if(tipo=="Bici Comuni"){
+        for(Container<Bicicletta*>::Iteratore it=shop.begin();it!=shop.end();++it){
+            if(dynamic_cast<BiciComuni*>(*it) && (*it)->getMarca()==testo ||(*it)->getModello()==testo ){
+                aux.aggiungiElemento(*it);
+            }
+        }
+    }else {
+        for(Container<Bicicletta*>::Iteratore it=shop.begin();it!=shop.end();++it){
+            if((*it)->getMarca()==testo ||(*it)->getModello()==testo ){
+                aux.aggiungiElemento(*it);
+            }
+        }
+    }
+
+    return aux;
 }
 
 

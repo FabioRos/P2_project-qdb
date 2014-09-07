@@ -1,13 +1,12 @@
 #ifndef BICICLETTA_H
 #define BICICLETTA_H
 
-#define NOME_FILE "file.dat"
 
 #include <iostream>
 #include <string>
 #include "eccezioni.h"
 #include <sstream>  //serve per salvare i numeri in formato stringa
-#include "utilita.h"
+
 
 using namespace std;
 

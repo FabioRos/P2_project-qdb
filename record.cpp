@@ -1,6 +1,6 @@
 #include "record.h"
 
-record::record(Bicicletta* b/*, int riga_corrente*/):ptrQuestaBici(b)/*,n_riga(riga_corrente)*/{
+record::record(Bicicletta* b, int riga_corrente=0):ptrQuestaBici(b),n_riga(riga_corrente){
     if(!b) throw errore();
     marca=new QLineEdit(QString::fromStdString(b->getMarca()));
     //ora connetto il segnale "textChanged(QString)" di 'marca' con il mio SLOT "marca_changed(Qstring)"
@@ -56,9 +56,6 @@ record::record(Bicicletta* b/*, int riga_corrente*/):ptrQuestaBici(b)/*,n_riga(r
         copricatena->setEnabled(false);
         fanale->setEnabled(false);
     }
-    //eliminazione
-     elimina=new QPushButton("elimina");
-     connect(elimina,SIGNAL(clicked()),this,SLOT(eliminariga()));
 }
 
 record::~record(){
@@ -138,10 +135,6 @@ void record::fanale_changed(int d ){
         p->setFanale(d);
 }
 
-void record::eliminariga(){
-    emit eliminariga(this);
-}
-
 /*Definizione Widgets*/
 
 QWidget *record::WidgetMarca() const{
@@ -184,7 +177,7 @@ QWidget *record::WidgetPeso() const{
     return peso;
 }
 
-QWidget * record::WidgetElimina(){
-    return elimina;
+int record::get_n_riga() const{
+    return n_riga;
 }
 

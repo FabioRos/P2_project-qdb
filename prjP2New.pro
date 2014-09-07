@@ -13,13 +13,11 @@ HEADERS += bicicletta.h \
            bicidacorsa.h \
            container.h \
            eccezioni.h \
-           file_manager.h \
            finestra_principale.h \
            inserimento.h \
            negozio.h \
            record.h \
            tabella.h \
-           utilita.h \
     ricerca.h
 SOURCES += bicicletta.cpp \
            bicicomuni.cpp \

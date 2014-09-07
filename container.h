@@ -47,7 +47,6 @@ public:
     T aggiungiElemento(const T&);               //restituisco l'elemento
     bool rimuoviElemento(const T&);
     bool sostituisciElemento(const T&,const T&);
-    //SmartP cercaElemento(const T&);               //restituisco il puntatore all'elemento
     void stampa() const;
     void rimuovi_tutto();
 
@@ -166,11 +165,6 @@ Container<T>::Nodo::Nodo(const T &elemento, const SmartP &n):riferimenti(0), inf
     //Container<T>::num++;
 }
 
-//template <class T>
-//Container<T>::Nodo::~Nodo(){
-//    Container::num--;
-//    delete this;
-//}
 
 /************************************************************************************
  *                                  Container                                       *
@@ -196,23 +190,31 @@ T Container<T>::aggiungiElemento(const T& elemento){    //in testa
 
 template <class T>
 bool Container<T>::rimuoviElemento(const T& elemento){ //rimuovo un elemento che mi viene passato
-    SmartP p=first;
-    SmartP prec=0;
+    bool isOk=true;
+    SmartP p=first, prec, q;
+    SmartP original=first;
+    first=0;
     while (p!=0 && !(p->info==elemento)){
-        prec=p;
+        q=new Nodo(p->info,p->next);
+        if(prec==0)
+            first=q;
+        else
+            prec->next=q;
+        prec=q;
         p=p->next;
     }
-    if(p!=0){
-        if(prec!=0)
-            first=p->next;
-        else
-            prec->next=p->next;
-        p->next=0;
+    if(p==0){
+        first=original;
+        isOk=false;
+
+     } else if(prec==0){
+                first=p->next;
+            }else
+                 prec->next=p->next;
         //p->riferimenti--;     lo fa il distruttore di smartP, perchè p è locale alla funzione
-        return true;
-    }
-    return false;
+    return isOk;
 }
+
 
 template <class T>
 bool Container<T>::sostituisciElemento(const T& _old,const T& _new){
@@ -228,18 +230,6 @@ bool Container<T>::sostituisciElemento(const T& _old,const T& _new){
     return false;
 }
 
-/*
-template <class T>
-typename Container<T>::SmartP Container<T>::cercaElemento(const T& elemento){
-    SmartP p=first;
-    while (p!=0){
-        if(p->info==elemento)
-            return p;
-        p=p->next;
-        }
-    return 0;
-}
-*/
 template <class T>
 void Container<T>::stampa() const{
     //da fare

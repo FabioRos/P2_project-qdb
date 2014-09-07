@@ -27,11 +27,11 @@ private:
     QLineEdit* specialita;
     QLineEdit* materiale;
     QDoubleSpinBox* peso;
-    QPushButton* elimina;
 
     int n_riga;
     Bicicletta* ptrQuestaBici;
     Negozio* shop;
+
 private slots:  //solo ad uso di questa classe
     //QLineEdit
     void marca_changed ( QString);
@@ -49,12 +49,14 @@ private slots:  //solo ad uso di questa classe
     void portapacchi_changed(int d );
     void copricatena_changed(int d );
     void fanale_changed(int d );
-    void eliminariga();
+public slots:
+
 signals:
-    void eliminariga(record*);
+    void numero_riga(int);
+    void cancella_record(Bicicletta*);
 
 public:
-    record(Bicicletta* /*,int*/);
+    record(Bicicletta*,int);   //tabella* -> per riuscire a cancellare la riga
     ~record();
     QWidget* WidgetMarca()const;
     QWidget* WidgetModello()const;
@@ -70,7 +72,8 @@ public:
     QWidget* WidgetSpecialita()const;
     QWidget* WidgetMateriale()const;
     QWidget* WidgetPeso()const;
-    QWidget* WidgetElimina();
+
+    int get_n_riga() const;
 };
 
 

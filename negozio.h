@@ -27,6 +27,7 @@ public:
     Container<Bicicletta*> getAll() const;
     //fai cerca per marca, tipo, ....
 
+    Container<Bicicletta*> ricerca_bicicletta(string ,string );
     void stampa() const;
     bool isEmpty() const;
 

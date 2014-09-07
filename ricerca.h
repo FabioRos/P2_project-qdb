@@ -3,22 +3,27 @@
 
 #include <QtGui>
 #include "negozio.h"
+#include "record.h"
+#include <string>
 
 class Ricerca : public QWidget
 {
     Q_OBJECT
     Negozio* db;
-
-     QComboBox* tipo;
-     QLineEdit* testo;  //cerco tra marca e modello
-     QPushButton* invia;
+    Container<record*> rec;
+    QComboBox* tipo;
+    QLineEdit* testo;  //cerco tra marca e modello
+    QPushButton* invia;
+    QTableWidget* tb;
+    void genera_tabella();
 public:
     explicit Ricerca(Negozio* n, QWidget *parent = 0);
 
 signals:
 
 public slots:
-
+    void Switch_tipo_ricerca(QString nuovo_tipo);
+    void esegui_ricerca();
 };
 
 #endif // RICERCA_H

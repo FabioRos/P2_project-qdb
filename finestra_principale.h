@@ -12,21 +12,18 @@
 #include "ricerca.h"
 
 class Finestra_Principale : public QMainWindow{
-    Q_OBJECT    //macro per gestire signal-slot
+    Q_OBJECT                        //macro per gestire signal-slot
     Negozio* shop;
     QTabWidget* mng_schede;
+    QPushButton* elimina;
 public:
     explicit Finestra_Principale(Negozio& n, QWidget *parent = 0);
 
 signals:
 
 public slots:
-
-private:
-    void disegnaFormInserimento();
-
-    QGroupBox *formInserimento;
-
+    void aggiuntabici();
+    void disabilita_status_bar(int);
 };
 
 #endif // FINESTRA_PRINCIPALE_H
