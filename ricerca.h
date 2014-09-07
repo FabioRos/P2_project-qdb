@@ -23,7 +23,7 @@ signals:
 
 public slots:
     void Switch_tipo_ricerca(QString nuovo_tipo);
-    void esegui_ricerca();
+    void esegui_ricerca(QString);
 };
 
 #endif // RICERCA_H

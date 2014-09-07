@@ -36,11 +36,12 @@ Ricerca::Ricerca(Negozio* n,QWidget *parent) : db(n), QWidget(parent){
 }
 //SLOT
 void Ricerca::Switch_tipo_ricerca(QString nuovo_tipo){
-   esegui_ricerca();
+  esegui_ricerca(nuovo_tipo);
 }
 
-void Ricerca::esegui_ricerca(){
-    QString t=tipo->currentText();//.toStdString();
+void Ricerca::esegui_ricerca(QString tipo_corrente){
+
+ //   QString t=tipo->currentText();//.toStdString();
     QString m=testo->text();//.toStdString();
     for(int a=tb->rowCount(); a>=0; --a){
         tb->removeRow(a);
@@ -50,7 +51,7 @@ void Ricerca::esegui_ricerca(){
         delete r;
     }
     rec=Container<record*>();
-    Container<Bicicletta*> aux=db->ricerca_bicicletta(t.toStdString(),m.toStdString());
+    Container<Bicicletta*> aux=db->ricerca_bicicletta(tipo_corrente.toStdString(),m.toStdString());
 
     for(Container<Bicicletta*>::Iteratore it=aux.begin();it!=aux.end();++it){
         rec.aggiungiElemento(new record(*it,0));    // siccome questo contenitore non è modificabile trascuro
